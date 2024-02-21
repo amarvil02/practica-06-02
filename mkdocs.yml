@@ -5,3 +5,7 @@ nav:
     - Acerca de: about.md
 
 theme: material
+  icon:
+    logo: material/library-shelves
+
+

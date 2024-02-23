@@ -1,0 +1,545 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../about/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.10">
+    
+    
+      
+        <title>Practica 01-03 - IAW</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e359304.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#despliegue-de-una-aplicacion-web-lamp-sencilla" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="IAW" class="md-header__button md-logo" aria-label="IAW" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 14.27 10.64 13A11.242 11.242 0 0 0 5 10.18v6.95c2.61.34 5 1.34 7 2.82 2-1.48 4.39-2.48 7-2.82v-6.95c-2.16.39-4.09 1.39-5.64 2.82M19 8.15c.65-.1 1.32-.15 2-.15v11c-3.5 0-6.64 1.35-9 3.54C9.64 20.35 6.5 19 3 19V8c.68 0 1.35.05 2 .15 2.69.41 5.1 1.63 7 3.39 1.9-1.76 4.31-2.98 7-3.39M12 6c.27 0 .5-.1.71-.29.19-.21.29-.44.29-.71s-.1-.5-.29-.71C12.5 4.11 12.27 4 12 4s-.5.11-.71.29c-.18.21-.29.45-.29.71s.11.5.29.71c.21.19.45.29.71.29m2.12 1.12a2.997 2.997 0 1 1-4.24-4.24 2.997 2.997 0 1 1 4.24 4.24Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            IAW
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Practica 01-03
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="IAW" class="md-nav__button md-logo" aria-label="IAW" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 14.27 10.64 13A11.242 11.242 0 0 0 5 10.18v6.95c2.61.34 5 1.34 7 2.82 2-1.48 4.39-2.48 7-2.82v-6.95c-2.16.39-4.09 1.39-5.64 2.82M19 8.15c.65-.1 1.32-.15 2-.15v11c-3.5 0-6.64 1.35-9 3.54C9.64 20.35 6.5 19 3 19V8c.68 0 1.35.05 2 .15 2.69.41 5.1 1.63 7 3.39 1.9-1.76 4.31-2.98 7-3.39M12 6c.27 0 .5-.1.71-.29.19-.21.29-.44.29-.71s-.1-.5-.29-.71C12.5 4.11 12.27 4 12 4s-.5.11-.71.29c-.18.21-.29.45-.29.71s.11.5.29.71c.21.19.45.29.71.29m2.12 1.12a2.997 2.997 0 1 1-4.24-4.24 2.997 2.997 0 1 1 4.24 4.24Z"/></svg>
+
+    </a>
+    IAW
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Principal
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Acerca de
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Practica 01-03
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Practica 01-03
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#creacion-install_lampsh" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creación install_lamp.sh
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creación install_lamp.sh">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instalacion-del-servidor-web-apache" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación del servidor web Apache
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instalacion-de-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación de MySQL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instalacion-de-php" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación de PHP
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creacion-deploysh" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creación deploy.sh
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aplicacion-web-lamp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aplicación web LAMP
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#creacion-install_lampsh" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creación install_lamp.sh
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creación install_lamp.sh">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instalacion-del-servidor-web-apache" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación del servidor web Apache
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instalacion-de-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación de MySQL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instalacion-de-php" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación de PHP
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creacion-deploysh" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creación deploy.sh
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aplicacion-web-lamp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aplicación web LAMP
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="despliegue-de-una-aplicacion-web-lamp-sencilla">Despliegue de una aplicación web LAMP sencilla</h1>
+<p>En esta práctica tenemos archivos importados de la práctica 1, en el directorio <em>conf</em> está el archivo <em>000-default.conf</em>, también tenemos en el directorio <em>php</em> el archivo <em>index.php</em> y en el directorio <em>scripts</em> tendremos el <em>.env</em> (variables distintas a la primera práctica) y el script <em>install_lamp.sh</em>, estos archivos provienen de la primera práctica. En esta práctica tenemos un script nuevo llamado <em>deploy.sh</em>, que es el script de Bash con la automatización del proceso de instalación de la aplicación web LAMP.</p>
+<h2 id="creacion-install_lampsh">Creación install_lamp.sh</h2>
+<p>Empezaremos el script con <strong>"#!/bin/bash"</strong>, que es un indicador que le dice al sistema operativo que el script debe ser ejecutado utilizando el intérprete de Bash.</p>
+<p>Tras esto, veremos también <strong>"set -x"</strong> que mostrará todos los comandos que se vayan ejecutando.</p>
+<p>Lo siguiente que vemos es el comando <strong>"apt update"</strong>, el cuál actualizará los repositorios. También, tendremos el comando <strong>"apt upgrade -y"</strong> que actualizará los paquetes que hemos instalado en el anterior comando a sus últimas versiones.</p>
+<h3 id="instalacion-del-servidor-web-apache">Instalación del servidor web Apache</h3>
+<p>A continuación, vamos a instalar el servidor web Apache, con el comando <strong>"apt install apache2 -y"</strong>. Aunque no esté reflejado en el script, necesitamos unos comandos para iniciar Apache. Con el comando <strong>"sudo systemctl start apache2"</strong> y con el comando <strong>"sudo systemctl enable apache2"</strong> dejará activado el servidor y no se apagará cada vez que apaguemos la máquina.</p>
+<h3 id="instalacion-de-mysql">Instalación de MySQL</h3>
+<p>El siguiente paso en el script será instalar el sistema gestor de base de datos de MySQL con el comando <strong>"apt install mysql-server -y"</strong>, al igual que con el servidor Apache tendremos que iniciar el servidor con el comando <strong>"sudo systemctl start mysql"</strong> y lo dejamos habilitado con <strong>"sudo systemctl enable mysql"</strong>. Con MySQL instalado podremos acceder a los archivos de configuración en <em>/etc/mysql/mysql.cnf</em>, a los archivos de log en <em>/var/log/mysql/error.log</em> y podremos acceder a MySQL con <strong>"sudo mysql"</strong>.</p>
+<h3 id="instalacion-de-php">Instalación de PHP</h3>
+<p>Lo siguiente que tenemos será PHP con sus módulos con el comando <strong>"apt install php libapache2-mod-php php-mysql -y"</strong>. Una vez instalado PHP, tendremos en el directorio php que tenemos de la primera práctica un archivo <em>index.php</em> en el cuál tendremos una estructura php con el contenido <em>phpinfo();</em> que nos permitirá comprobar que la instalación de PHP se ha completado con éxito, si accedes a tu dirección <em>IP/info.php</em> verás la página con PHP.</p>
+<p>En el directorio <em>conf</em> que hemos importado, veremos un archivo llamado <em>000-default.conf</em> para la configuración de Apache. En nuestro script, copiaremos ese archivo con el comando <strong>"cp ../conf/000-default.conf /etc/apache2/sites-available"</strong>.</p>
+<p>Tras esto, reiniciamos Apache con <strong>"systemctl restart apache2"</strong>.</p>
+<p>Antes hemos visto que hemos importado el archivo <em>index.php</em> pero no esta implementado en nuestro script y por lo tanto, no se aplicará. Para que funcione copiaremos este archivo en el script con el comando <em>cp</em> -&gt; <strong>"cp ../php/index.php /var/www/html"</strong>.</p>
+<p>Por último, modificamos el propietario y el grupo de los directorios de forma recursiva del directorio <em>/var/www/html</em> a través de <strong>"chown -R www-data:www-data /var/www/html"</strong>.</p>
+<p>Lo ejecutamos con <strong>sudo ./install_lamp</strong>, no necesitamos darle permisos porque ya los tendrá de la anterior práctica.</p>
+<h2 id="creacion-deploysh">Creación deploy.sh</h2>
+<p>Este script, como ya he dicho, nos va a permitir la automatización del proceso de instalación de la aplicación web LAMP. Lo primero que tenemos en este script, son las diez primeras linea del <em>install_lamp.sh</em> que tendrán la misma función que en script de LAMP.</p>
+<p>Pero antes de actualizar, tenemos el comando <strong>"source.env"</strong>, este comando incluye las variables que tenemos en el archivo <em>.env</em> que nos servirán para configurar las variables que nos servirán en comandos posteriores, el contenido de este archivo no es el mismo que en la primera práctica, será:</p>
+<p>DB_NAME=aplicacion
+<br>
+DB_USER=lamp_user
+<br>
+DB_PASSWORD=lamp_password</p>
+<h2 id="aplicacion-web-lamp">Aplicación web LAMP</h2>
+<p>Lo siguiente que tenemos, es un comando para eliminar las descargas previas de nuestro repositorio <em>/tmp/iaw-practica-lamp</em> (un directorio temporal) para que cada vez que ejecutemos el script se pueda descargar la aplicación de nuevo y no de problemas, utilizamos <strong>"rm -rf /tmp/iaw-practica-lamp"</strong>.</p>
+<p>Una vez que hemos configurado esto, vamos a clonar un repositorio que contiene el código fuente de la aplicación -&gt; <strong>"git clone https://github.com/josejuansanchez/iaw-practica-lamp.git /tmp/iaw-practica-lamp"</strong> que tiene una base de datos y un directorio <em>source</em> (código fuente) que contiene entre otros, el archivo <em>config.php</em> que configuraremos ahora y que contiene las variables.</p>
+<p>Tras clonar el repositorio, vamos a mover su código fuente al directorio <em>/var/www/html</em> con el comando <em>mv</em>,<strong>"mv /tmp/iaw-practica-lamp/src/* /var/www/html"</strong>. </p>
+<p>Ya que tenemos esto copiado, como he mencionado, dentro de aquí está el archivo <em>config.php</em>, el siguiente paso va a ser configurar este archivo:</p>
+<p>sed -i "s/database_name_here/$DB_NAME/" /var/www/html/config.php
+<br>
+sed -i "s/username_here/$DB_USER/" /var/www/html/config.php
+<br>
+sed -i "s/password_here/$DB_PASSWORD/" /var/www/html/config.php</p>
+<p>Lo que acabamos de hacer es reemplazar la variables que tenía la aplicación y hemos puesto las nuestras que tenemos en el archivo <em>.env</em>.</p>
+<p>Aunque hayamos configurado las variables para el nombre, el usuario y la contraseña de la base de datos, la base de datos no puede tener cualquier nombre que le pongamos ya que se llama <em>lamp_db</em> para poder cambiarselo utilizamos de nuevo el comando sed:</p>
+<p><strong>sed -i "s/lamp_db/$DB_NAME/" /tmp/iaw-practica-lamp/db/database.sql</strong></p>
+<p>Una vez realizada toda la configuración, vamos a importar el script de la base de datos con el comando <strong>"mysql -u root &lt; /tmp/iaw-practica-lamp/db/database.sql"</strong>. También, vamos a crear el usuario de la base de datos asignandole privilegios:</p>
+<p>mysql -u root &lt;&lt;&lt; "DROP USER IF EXISTS $DB_USER@'%'"
+<br>
+mysql -u root &lt;&lt;&lt; "CREATE USER $DB_USER@'%' IDENTIFIED BY '$DB_PASSWORD'"
+<br>
+mysql -u root &lt;&lt;&lt; "GRANT ALL PRIVILEGES ON $DB_NAME.* TO $DB_USER@'%'"</p>
+<p>Este comando lo que hace es, primero eliminar usuario si existe el usuario que tenemos en nuestra variable. También, crea usuario identificado por la contraseña asignada en la variable y da todos los privilegios al usuario sobre la base de datos.</p>
+<p>Para terminar, como siempre, modificamos el grupo y el propietario de <em>/var/www/html</em> con <strong>"chown -R www-data:www-data /var/www/html"</strong>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["header.autohide"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.8fd75fb4.min.js"></script>
+      
+    
+  </body>
+</html>

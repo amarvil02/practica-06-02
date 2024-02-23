@@ -6,7 +6,9 @@ nav:
 
 theme:
     name: material
-    palette:
-        scheme: blue
-
+    font:
+        text: roboto
+    language: es
+    icon:
+        logo: material/library-outline
 

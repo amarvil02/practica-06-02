@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Practica 01-04 - IAW</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Practica 01-04";
+        var mkdocs_page_input_path = "practica-01-04.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> IAW
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Principal</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../about/">Acerca de</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../practica-01-03/">Practica 01-03</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Practica 01-04</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#creacion-install_lampsh">Creación install_lamp.sh</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#instalacion-del-servidor-web-apache">Instalación del servidor web Apache</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#instalacion-de-mysql">Instalación de MySQL</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#instalacion-de-php">Instalación de PHP</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#creacion-setup_selfsigned_certificatesh">Creación setup_selfsigned_certificate.sh</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#configuracion-para-que-las-peticiones-a-http-se-redirijan-a-https">Configuración para que las peticiones a HTTP se redirijan a HTTPS</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">IAW</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Practica 01-04</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="iaw-practica-01-04">IAW - Práctica 01-04</h1>
+<p>En esta práctica vamos a crear un certificado SSL/TLS autofirmado con la herramienta openssl. Una vez creado vamos a configurar el servidor web Apache para que utilice dicho certificado.</p>
+<p>Para esta práctica tenemos un directorio <em>conf</em> donde habrá dos archivos de configuración de los que hablaré posteriormente, también en el directorio <em>scripts</em> tenemos un archivo <em>.env</em> donde estarán las variables, tenemos el script para instalar la pila LAMP (<em>install_lamp.sh</em>) y por último, el nuevo script que vamos a tener en esta práctica es el setup_selfsigned_certifice.sh que nos va a permitir crear y configurar un certificado SSL autofirmado.</p>
+<p>Todos los archivos excepto <em>default-ssl.conf</em> y <em>setup_selfsigned_certificate</em> han sido importados de la práctica 01-03, aunque en el <em>.env</em> las variables van a cambiar y el <em>000-default.conf</em> va a tener otra configuración.</p>
+<h2 id="creacion-install_lampsh">Creación install_lamp.sh</h2>
+<p>Empezaremos el script con <strong>"#!/bin/bash"</strong>, que es un indicador que le dice al sistema operativo que el script debe ser ejecutado utilizando el intérprete de Bash.</p>
+<p>Tras esto, veremos también <strong>"set -x"</strong> que mostrará todos los comandos que se vayan ejecutando.</p>
+<p>Lo siguiente que vemos es el comando <strong>"apt update"</strong>, el cuál actualizará los repositorios. También, tendremos el comando <strong>"apt upgrade -y"</strong> que actualizará los paquetes que hemos instalado en el anterior comando a sus últimas versiones.</p>
+<h3 id="instalacion-del-servidor-web-apache">Instalación del servidor web Apache</h3>
+<p>A continuación, vamos a instalar el servidor web Apache, con el comando <strong>"apt install apache2 -y"</strong>. Aunque no esté reflejado en el script, necesitamos unos comandos para iniciar Apache. Con el comando <strong>"sudo systemctl start apache2"</strong> y con el comando <strong>"sudo systemctl enable apache2"</strong> dejará activado el servidor y no se apagará cada vez que apaguemos la máquina.</p>
+<h3 id="instalacion-de-mysql">Instalación de MySQL</h3>
+<p>El siguiente paso en el script será instalar el sistema gestor de base de datos de MySQL con el comando <strong>"apt install mysql-server -y"</strong>, al igual que con el servidor Apache tendremos que iniciar el servidor con el comando <strong>"sudo systemctl start mysql"</strong> y lo dejamos habilitado con <strong>"sudo systemctl enable mysql"</strong>. Con MySQL instalado podremos acceder a los archivos de configuración en <em>/etc/mysql/mysql.cnf</em>, a los archivos de log en <em>/var/log/mysql/error.log</em> y podremos acceder a MySQL con <strong>"sudo mysql"</strong>.</p>
+<h3 id="instalacion-de-php">Instalación de PHP</h3>
+<p>Lo siguiente que tenemos será la instalación de PHP con sus módulos con el comando <strong>"apt install php libapache2-mod-php php-mysql -y"</strong>.</p>
+<p>En el directorio <em>conf</em> que hemos importado, veremos un archivo llamado <em>000-default.conf</em> para la configuración de Apache. En nuestro script, copiaremos ese archivo con el comando <strong>"cp ../conf/000-default.conf /etc/apache2/sites-available"</strong>. Tras esto, reiniciamos Apache con <strong>"systemctl restart apache2"</strong>. El contenido de este archivo cambiará más adelante.</p>
+<p>Por último, modificamos el propietario y el grupo de los directorios de forma recursiva del directorio <em>/var/www/html</em> a través de <strong>"chown -R www-data:www-data /var/www/html"</strong>.</p>
+<p>Lo ejecutamos con <strong>sudo ./install_lamp</strong>, no necesitamos darle permisos porque ya los tendrá de la anterior práctica.</p>
+<h2 id="creacion-setup_selfsigned_certificatesh">Creación setup_selfsigned_certificate.sh</h2>
+<p>Lo primero que tenemos son que las 10 primeras líneas son copiadas del <em>install_lamp.sh</em> que sirven para lo que he explicado en la pila LAMP.</p>
+<p>Antes de todo, importamos el archivo <em>.env</em> del cuál las variables que vamos a configurar nos van a servir en el script dentro de unos pasos.</p>
+<p>A continuación, vamos a crear un certificado y una clave privada con el comando:</p>
+<pre><code>openssl req \
+  -x509 \
+  -nodes \
+  -days 365 \
+  -newkey rsa:2048 \
+  -keyout /etc/ssl/private/apache-selfsigned.key \
+  -out /etc/ssl/certs/apache-selfsigned.crt \
+  -subj &quot;/C=$OPENSSL_COUNTRY/ST=$OPENSSL_PROVINCE/L=$OPENSSL_LOCALITY/O=$OPENSSL_ORGANIZATION/OU=$OPENSSL_ORGUNIT/CN=$OPENSSL_COMMON_NAME/emailAddress=$OPENSSL_EMAIL&quot;
+</code></pre>
+<p>Se ha utilizado la utilidad openssl con los siguientes parámetros, <em>req</em> que se utiliza para crear certificados autofirmados, <em>-x509</em> que indica que queremos crear un certificado autofirmado en lugar de una solicitud de certificado, <em>-nodes</em> que hace que la clave privada del certificado no esté protegida por contraseña y esta sin encriptar, <em>-days 365</em> que nos dice la validez del certificado, en este caso de 365 días, <em>-newkey rsa:2048</em> para generar una nueva clave privada RSA de 2048 bits junto con el certificado, <em>-keyout /etc/ssl/private/apache-selfsigned.key</em> para determinar la ubicación y el nombre del archivo donde se guardará la clave privada generada, <em>-out /etc/ssl/certs/apache-selfsigned.crt</em> que indica el lugar y el nombre del archivo donde se guarda la clave privada que vamos a generar. Sin la última parte del comando, cuando lo ejecutemos, nos va a pedir que introduzcamos una serie de datos que irán al certificado, de esta manera sería hacerlo a mano. Para automatizar este proceso, en el <em>.env</em> vamos a definir las variables que necesita el certificado y lo vamos a añadir a nuestro script con <strong>-subj "/C=$OPENSSL_COUNTRY/ST=$OPENSSL_PROVINCE/L=$OPENSSL_LOCALITY/O=$OPENSSL_ORGANIZATION/OU=$OPENSSL_ORGUNIT/CN=$OPENSSL_COMMON_NAME/emailAddress=$OPENSSL_EMAIL"</strong>, como vemos tenemos el país, la provincia, localidad, organización, sección de la organización, nombre del dominio y el email sin tener que introducirlo manualmente.</p>
+<p>Seguimos viendo el script, y ahora vamos a copiar el archivo de configuración de Apache para HTTPS, vamos a habilitar el tráfico de HTTPS. Su contenido tiene el siguiente significado:</p>
+<ul>
+<li><VirtualHost *:443>: Permite escuchar por el puerto 443 que es el de HTTPS.</li>
+<li>ServerName: El nombre de dominio que asignemos.</li>
+<li>DocumentRoot: Ruta del directorio raíz del host virtual</li>
+<li>SSLEngine on: Para que se utilice SSL.</li>
+<li>SSLCertificateFile: La ruta del certificado que hemos autofirmado</li>
+<li>SSLCertificateKeyFile: La ruta de la clave privada de nuestro certificado.</li>
+</ul>
+<p>Una vez que hemos visto el <em>default-ssl.conf</em>, lo copiamos en nuestro script con <strong>"cp ../conf/default-ssl.conf /etc/apache2/sites-available/"</strong> que copiará el archivo de configuración en <em>/etc/apache2/sites-available/</em>.</p>
+<p>Seguimos, y ahora habilitamos el virtual host para HTTPS a través del comando <strong>"a2ensite default-ssl.conf"</strong>, <em>a2ensite</em> sirve para eso, para habilitar un sitio web especificado que contiene un bloque VirtualHost dentro de la configuración de apache2. También, habilitamos el modulo SSL con <strong>"a2enmod ssl"</strong>.</p>
+<h3 id="configuracion-para-que-las-peticiones-a-http-se-redirijan-a-https">Configuración para que las peticiones a HTTP se redirijan a HTTPS</h3>
+<p>Vamos a configurar nuestro archivo <em>000-default.conf</em> para hacer que las peticiones de HTTP se redirijan a HTTPS, el contenido de este archivo es el siguiente:</p>
+<pre><code>&lt;VirtualHost *:80&gt;
+    DocumentRoot /var/www/html
+
+    # Redirige al puerto 443 (HTTPS)
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+&lt;/VirtualHost&gt;
+</code></pre>
+<p>Por un lado, <em>RewriteEngine</em> habilita el motor de reescritura de URLs y nos permite usar reglas de reescritura. <em>RewriteCond %{HTTPS} off</em> es una condición que comprueba si la petición recibida utiliza HTTPS o no.</p>
+<p><em>RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]</em>: Las reglas de reescritura tienen la siguiente sintaxis <em>RewriteRule Pattern Substitution [flags]</em>. Esto tiene el significa de que <em>Pattern</em> es el patrón que tiene que cumplirse en la URL para que la regla de reescritura se aplique, <em>Substitution</em> se refiere a la URL a la que se redirige la solicitud y los <em>flags</em> cambian el comportamiento de la regla, en este caso, indica que es una redirección permanente.</p>
+<p>Este archivo vamos a copiarlo en el directorio <em>/etc/apache2/sites-available</em>, para hacerlo en nuestro script vamos a copiarlo en este directorio con el comando <em>cp</em> -&gt; <strong>"cp ../conf/000-default.conf /etc/apache2/sites-available"</strong>.</p>
+<p>Antes de terminar nuestro script, tenemos que habilitar el módulo rewrite para hacer la redirección de HTTP a HTTPS, <strong>"a2enmod rewrite"</strong> y reiniciamos el servicio de Apache <strong>"systemctl restart apache2"</strong>.</p>
+<p>Para terminar, podemos configurar en el script una variable para que podamos poner cualquier dominio que queramos y no un único dominio siempre, esta marcado como comentario porque no está aplicado. Para aplicarlo con el comando <strong>"sed -i "s//$PUT_YOUR_DOMAIN_HERE" /etc/apache2/sites-available"</strong> modificamos el server name para cualquier dominio y en las variables configuramos el nombre con <em>PUT_YOUR_DOMAIN_HERE</em>.</p>
+<p>Para ejecutarlo, en el terminal entramos a nuestro directorio <em>scripts</em> y le damos permisos al script <em>setup_selfsigned_certificate.sh</em> con **chmod +x setup_selfsign</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../practica-01-03/" class="btn btn-neutral float-left" title="Practica 01-03"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../practica-01-03/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

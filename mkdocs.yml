@@ -3,6 +3,7 @@ site_name: IAW
 nav:
     - Principal: index.md
     - Acerca de: about.md
+    - Practica 01-03: practica-01-03.md
 
 theme:
     name: material
@@ -11,4 +12,6 @@ theme:
     language: es
     icon:
         logo: material/library-outline
+    features:
+        - header.autohide
 

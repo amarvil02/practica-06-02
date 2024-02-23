@@ -4,11 +4,12 @@ nav:
     - Principal: index.md
     - Acerca de: about.md
     - Practica 01-03: practica-01-03.md
+        - Practica 01-04: practica-01-04.md
 
 theme:
-    name: material
+    name: readthedocs
     font:
-        text: roboto
+        text: roboto mono
     language: es
     icon:
         logo: material/library-outline

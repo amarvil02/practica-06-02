@@ -88,4 +88,4 @@ Para terminar, podemos configurar en el script una variable para que podamos pon
 
 Para ejecutarlo, en el terminal entramos a nuestro directorio *scripts* y le damos permisos al script *setup_selfsigned_certificate.sh* con **chmod +x setup_selfsign
 
-![]({{ site.url }}/images/ssl.png)
+![ssl](/images/ssl.png)

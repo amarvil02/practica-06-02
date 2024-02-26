@@ -87,3 +87,5 @@ Antes de terminar nuestro script, tenemos que habilitar el módulo rewrite para 
 Para terminar, podemos configurar en el script una variable para que podamos poner cualquier dominio que queramos y no un único dominio siempre, esta marcado como comentario porque no está aplicado. Para aplicarlo con el comando **"sed -i "s//$PUT_YOUR_DOMAIN_HERE" /etc/apache2/sites-available"** modificamos el server name para cualquier dominio y en las variables configuramos el nombre con *PUT_YOUR_DOMAIN_HERE*.
 
 Para ejecutarlo, en el terminal entramos a nuestro directorio *scripts* y le damos permisos al script *setup_selfsigned_certificate.sh* con **chmod +x setup_selfsign
+
+![]({{ site.url }}/images/ssl.png)

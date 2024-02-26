@@ -2,14 +2,13 @@ site_name: IAW
 
 nav:
     - Principal: index.md
-    - Acerca de: about.md
     - Practicas: practicas.md
     - Practica 01-04: practica-01-04.md
+    - Acerca de: about.md
 
 theme:
     name: readthedocs
-    font:
-        text: roboto mono
+    font: roboto mono
     language: es
     icon:
         logo: material/library-outline

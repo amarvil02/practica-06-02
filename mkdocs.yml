@@ -7,7 +7,7 @@ nav:
     - Acerca de: about.md
 
 theme:
-    name: readthedocs
+    name: material
     font: 
         text: Roboto Mono
     language: es

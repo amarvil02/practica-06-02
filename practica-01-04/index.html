@@ -536,6 +536,7 @@
 <p>Antes de terminar nuestro script, tenemos que habilitar el módulo rewrite para hacer la redirección de HTTP a HTTPS, <strong>"a2enmod rewrite"</strong> y reiniciamos el servicio de Apache <strong>"systemctl restart apache2"</strong>.</p>
 <p>Para terminar, podemos configurar en el script una variable para que podamos poner cualquier dominio que queramos y no un único dominio siempre, esta marcado como comentario porque no está aplicado. Para aplicarlo con el comando <strong>"sed -i "s//$PUT_YOUR_DOMAIN_HERE" /etc/apache2/sites-available"</strong> modificamos el server name para cualquier dominio y en las variables configuramos el nombre con <em>PUT_YOUR_DOMAIN_HERE</em>.</p>
 <p>Para ejecutarlo, en el terminal entramos a nuestro directorio <em>scripts</em> y le damos permisos al script <em>setup_selfsigned_certificate.sh</em> con **chmod +x setup_selfsign</p>
+<p><img alt="" src="{{ site.url }}/images/ssl.png" /></p>
 
 
 

@@ -8,7 +8,8 @@ nav:
 
 theme:
     name: readthedocs
-    font: roboto mono
+    font: 
+        text: Anta
     language: es
     icon:
         logo: material/library-outline

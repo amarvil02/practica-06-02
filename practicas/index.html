@@ -98,25 +98,25 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="practica-01-03">Practica 01-03</h1>
-<h2 id="despliegue-de-una-aplicacion-web-lamp-sencilla">Despliegue de una aplicación web LAMP sencilla</h2>
+                <h2 id="practica-01-03">Practica 01-03</h2>
+<h3 id="despliegue-de-una-aplicacion-web-lamp-sencilla">Despliegue de una aplicación web LAMP sencilla</h3>
 <p>En esta práctica tenemos archivos importados de la práctica 1, en el directorio <em>conf</em> está el archivo <em>000-default.conf</em>, también tenemos en el directorio <em>php</em> el archivo <em>index.php</em> y en el directorio <em>scripts</em> tendremos el <em>.env</em> (variables distintas a la primera práctica) y el script <em>install_lamp.sh</em>, estos archivos provienen de la primera práctica. En esta práctica tenemos un script nuevo llamado <em>deploy.sh</em>, que es el script de Bash con la automatización del proceso de instalación de la aplicación web LAMP.</p>
-<h3 id="creacion-install_lampsh">Creación install_lamp.sh</h3>
+<h4 id="creacion-install_lampsh">Creación install_lamp.sh</h4>
 <p>Empezaremos el script con <strong>"#!/bin/bash"</strong>, que es un indicador que le dice al sistema operativo que el script debe ser ejecutado utilizando el intérprete de Bash.</p>
 <p>Tras esto, veremos también <strong>"set -x"</strong> que mostrará todos los comandos que se vayan ejecutando.</p>
 <p>Lo siguiente que vemos es el comando <strong>"apt update"</strong>, el cuál actualizará los repositorios. También, tendremos el comando <strong>"apt upgrade -y"</strong> que actualizará los paquetes que hemos instalado en el anterior comando a sus últimas versiones.</p>
-<h4 id="instalacion-del-servidor-web-apache">Instalación del servidor web Apache</h4>
+<h5 id="instalacion-del-servidor-web-apache">Instalación del servidor web Apache</h5>
 <p>A continuación, vamos a instalar el servidor web Apache, con el comando <strong>"apt install apache2 -y"</strong>. Aunque no esté reflejado en el script, necesitamos unos comandos para iniciar Apache. Con el comando <strong>"sudo systemctl start apache2"</strong> y con el comando <strong>"sudo systemctl enable apache2"</strong> dejará activado el servidor y no se apagará cada vez que apaguemos la máquina.</p>
-<h4 id="instalacion-de-mysql">Instalación de MySQL</h4>
+<h5 id="instalacion-de-mysql">Instalación de MySQL</h5>
 <p>El siguiente paso en el script será instalar el sistema gestor de base de datos de MySQL con el comando <strong>"apt install mysql-server -y"</strong>, al igual que con el servidor Apache tendremos que iniciar el servidor con el comando <strong>"sudo systemctl start mysql"</strong> y lo dejamos habilitado con <strong>"sudo systemctl enable mysql"</strong>. Con MySQL instalado podremos acceder a los archivos de configuración en <em>/etc/mysql/mysql.cnf</em>, a los archivos de log en <em>/var/log/mysql/error.log</em> y podremos acceder a MySQL con <strong>"sudo mysql"</strong>.</p>
-<h4 id="instalacion-de-php">Instalación de PHP</h4>
+<h5 id="instalacion-de-php">Instalación de PHP</h5>
 <p>Lo siguiente que tenemos será PHP con sus módulos con el comando <strong>"apt install php libapache2-mod-php php-mysql -y"</strong>. Una vez instalado PHP, tendremos en el directorio php que tenemos de la primera práctica un archivo <em>index.php</em> en el cuál tendremos una estructura php con el contenido <em>phpinfo();</em> que nos permitirá comprobar que la instalación de PHP se ha completado con éxito, si accedes a tu dirección <em>IP/info.php</em> verás la página con PHP.</p>
 <p>En el directorio <em>conf</em> que hemos importado, veremos un archivo llamado <em>000-default.conf</em> para la configuración de Apache. En nuestro script, copiaremos ese archivo con el comando <strong>"cp ../conf/000-default.conf /etc/apache2/sites-available"</strong>.</p>
 <p>Tras esto, reiniciamos Apache con <strong>"systemctl restart apache2"</strong>.</p>
 <p>Antes hemos visto que hemos importado el archivo <em>index.php</em> pero no esta implementado en nuestro script y por lo tanto, no se aplicará. Para que funcione copiaremos este archivo en el script con el comando <em>cp</em> -&gt; <strong>"cp ../php/index.php /var/www/html"</strong>.</p>
 <p>Por último, modificamos el propietario y el grupo de los directorios de forma recursiva del directorio <em>/var/www/html</em> a través de <strong>"chown -R www-data:www-data /var/www/html"</strong>.</p>
 <p>Lo ejecutamos con <strong>sudo ./install_lamp</strong>, no necesitamos darle permisos porque ya los tendrá de la anterior práctica.</p>
-<h3 id="creacion-deploysh">Creación deploy.sh</h3>
+<h4 id="creacion-deploysh">Creación deploy.sh</h4>
 <p>Este script, como ya he dicho, nos va a permitir la automatización del proceso de instalación de la aplicación web LAMP. Lo primero que tenemos en este script, son las diez primeras linea del <em>install_lamp.sh</em> que tendrán la misma función que en script de LAMP.</p>
 <p>Pero antes de actualizar, tenemos el comando <strong>"source.env"</strong>, este comando incluye las variables que tenemos en el archivo <em>.env</em> que nos servirán para configurar las variables que nos servirán en comandos posteriores, el contenido de este archivo no es el mismo que en la primera práctica, será:</p>
 <p>DB_NAME=aplicacion
@@ -124,7 +124,7 @@
 DB_USER=lamp_user
 <br>
 DB_PASSWORD=lamp_password</p>
-<h3 id="aplicacion-web-lamp">Aplicación web LAMP</h3>
+<h4 id="aplicacion-web-lamp">Aplicación web LAMP</h4>
 <p>Lo siguiente que tenemos, es un comando para eliminar las descargas previas de nuestro repositorio <em>/tmp/iaw-practica-lamp</em> (un directorio temporal) para que cada vez que ejecutemos el script se pueda descargar la aplicación de nuevo y no de problemas, utilizamos <strong>"rm -rf /tmp/iaw-practica-lamp"</strong>.</p>
 <p>Una vez que hemos configurado esto, vamos a clonar un repositorio que contiene el código fuente de la aplicación -&gt; <strong>"git clone https://github.com/josejuansanchez/iaw-practica-lamp.git /tmp/iaw-practica-lamp"</strong> que tiene una base de datos y un directorio <em>source</em> (código fuente) que contiene entre otros, el archivo <em>config.php</em> que configuraremos ahora y que contiene las variables.</p>
 <p>Tras clonar el repositorio, vamos a mover su código fuente al directorio <em>/var/www/html</em> con el comando <em>mv</em>,<strong>"mv /tmp/iaw-practica-lamp/src/* /var/www/html"</strong>. </p>
@@ -145,24 +145,24 @@ mysql -u root &lt;&lt;&lt; "CREATE USER $DB_USER@'%' IDENTIFIED BY '$DB_PASSWORD
 mysql -u root &lt;&lt;&lt; "GRANT ALL PRIVILEGES ON $DB_NAME.* TO $DB_USER@'%'"</p>
 <p>Este comando lo que hace es, primero eliminar usuario si existe el usuario que tenemos en nuestra variable. También, crea usuario identificado por la contraseña asignada en la variable y da todos los privilegios al usuario sobre la base de datos.</p>
 <p>Para terminar, como siempre, modificamos el grupo y el propietario de <em>/var/www/html</em> con <strong>"chown -R www-data:www-data /var/www/html"</strong>.</p>
-<h1 id="iaw-practica-01-04">IAW - Práctica 01-04</h1>
+<h2 id="iaw-practica-01-04">IAW - Práctica 01-04</h2>
 <p>En esta práctica vamos a crear un certificado SSL/TLS autofirmado con la herramienta openssl. Una vez creado vamos a configurar el servidor web Apache para que utilice dicho certificado.</p>
 <p>Para esta práctica tenemos un directorio <em>conf</em> donde habrá dos archivos de configuración de los que hablaré posteriormente, también en el directorio <em>scripts</em> tenemos un archivo <em>.env</em> donde estarán las variables, tenemos el script para instalar la pila LAMP (<em>install_lamp.sh</em>) y por último, el nuevo script que vamos a tener en esta práctica es el setup_selfsigned_certifice.sh que nos va a permitir crear y configurar un certificado SSL autofirmado.</p>
 <p>Todos los archivos excepto <em>default-ssl.conf</em> y <em>setup_selfsigned_certificate</em> han sido importados de la práctica 01-03, aunque en el <em>.env</em> las variables van a cambiar y el <em>000-default.conf</em> va a tener otra configuración.</p>
-<h2 id="creacion-install_lampsh_1">Creación install_lamp.sh</h2>
+<h3 id="creacion-install_lampsh_1">Creación install_lamp.sh</h3>
 <p>Empezaremos el script con <strong>"#!/bin/bash"</strong>, que es un indicador que le dice al sistema operativo que el script debe ser ejecutado utilizando el intérprete de Bash.</p>
 <p>Tras esto, veremos también <strong>"set -x"</strong> que mostrará todos los comandos que se vayan ejecutando.</p>
 <p>Lo siguiente que vemos es el comando <strong>"apt update"</strong>, el cuál actualizará los repositorios. También, tendremos el comando <strong>"apt upgrade -y"</strong> que actualizará los paquetes que hemos instalado en el anterior comando a sus últimas versiones.</p>
-<h3 id="instalacion-del-servidor-web-apache_1">Instalación del servidor web Apache</h3>
+<h4 id="instalacion-del-servidor-web-apache_1">Instalación del servidor web Apache</h4>
 <p>A continuación, vamos a instalar el servidor web Apache, con el comando <strong>"apt install apache2 -y"</strong>. Aunque no esté reflejado en el script, necesitamos unos comandos para iniciar Apache. Con el comando <strong>"sudo systemctl start apache2"</strong> y con el comando <strong>"sudo systemctl enable apache2"</strong> dejará activado el servidor y no se apagará cada vez que apaguemos la máquina.</p>
-<h3 id="instalacion-de-mysql_1">Instalación de MySQL</h3>
+<h4 id="instalacion-de-mysql_1">Instalación de MySQL</h4>
 <p>El siguiente paso en el script será instalar el sistema gestor de base de datos de MySQL con el comando <strong>"apt install mysql-server -y"</strong>, al igual que con el servidor Apache tendremos que iniciar el servidor con el comando <strong>"sudo systemctl start mysql"</strong> y lo dejamos habilitado con <strong>"sudo systemctl enable mysql"</strong>. Con MySQL instalado podremos acceder a los archivos de configuración en <em>/etc/mysql/mysql.cnf</em>, a los archivos de log en <em>/var/log/mysql/error.log</em> y podremos acceder a MySQL con <strong>"sudo mysql"</strong>.</p>
-<h3 id="instalacion-de-php_1">Instalación de PHP</h3>
+<h4 id="instalacion-de-php_1">Instalación de PHP</h4>
 <p>Lo siguiente que tenemos será la instalación de PHP con sus módulos con el comando <strong>"apt install php libapache2-mod-php php-mysql -y"</strong>.</p>
 <p>En el directorio <em>conf</em> que hemos importado, veremos un archivo llamado <em>000-default.conf</em> para la configuración de Apache. En nuestro script, copiaremos ese archivo con el comando <strong>"cp ../conf/000-default.conf /etc/apache2/sites-available"</strong>. Tras esto, reiniciamos Apache con <strong>"systemctl restart apache2"</strong>. El contenido de este archivo cambiará más adelante.</p>
 <p>Por último, modificamos el propietario y el grupo de los directorios de forma recursiva del directorio <em>/var/www/html</em> a través de <strong>"chown -R www-data:www-data /var/www/html"</strong>.</p>
 <p>Lo ejecutamos con <strong>sudo ./install_lamp</strong>, no necesitamos darle permisos porque ya los tendrá de la anterior práctica.</p>
-<h2 id="creacion-setup_selfsigned_certificatesh">Creación setup_selfsigned_certificate.sh</h2>
+<h3 id="creacion-setup_selfsigned_certificatesh">Creación setup_selfsigned_certificate.sh</h3>
 <p>Lo primero que tenemos son que las 10 primeras líneas son copiadas del <em>install_lamp.sh</em> que sirven para lo que he explicado en la pila LAMP.</p>
 <p>Antes de todo, importamos el archivo <em>.env</em> del cuál las variables que vamos a configurar nos van a servir en el script dentro de unos pasos.</p>
 <p>A continuación, vamos a crear un certificado y una clave privada con el comando:</p>
@@ -187,7 +187,7 @@ mysql -u root &lt;&lt;&lt; "GRANT ALL PRIVILEGES ON $DB_NAME.* TO $DB_USER@'%'"<
 </ul>
 <p>Una vez que hemos visto el <em>default-ssl.conf</em>, lo copiamos en nuestro script con <strong>"cp ../conf/default-ssl.conf /etc/apache2/sites-available/"</strong> que copiará el archivo de configuración en <em>/etc/apache2/sites-available/</em>.</p>
 <p>Seguimos, y ahora habilitamos el virtual host para HTTPS a través del comando <strong>"a2ensite default-ssl.conf"</strong>, <em>a2ensite</em> sirve para eso, para habilitar un sitio web especificado que contiene un bloque VirtualHost dentro de la configuración de apache2. También, habilitamos el modulo SSL con <strong>"a2enmod ssl"</strong>.</p>
-<h3 id="configuracion-para-que-las-peticiones-a-http-se-redirijan-a-https">Configuración para que las peticiones a HTTP se redirijan a HTTPS</h3>
+<h4 id="configuracion-para-que-las-peticiones-a-http-se-redirijan-a-https">Configuración para que las peticiones a HTTP se redirijan a HTTPS</h4>
 <p>Vamos a configurar nuestro archivo <em>000-default.conf</em> para hacer que las peticiones de HTTP se redirijan a HTTPS, el contenido de este archivo es el siguiente:</p>
 <pre><code>&lt;VirtualHost *:80&gt;
     DocumentRoot /var/www/html
